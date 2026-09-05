@@ -29,8 +29,16 @@ fn download_x(src: String, tab: Tab) -> Nil {
 fn download_pixiv(id: String, tab: Tab) -> Nil {
   use body <- chrome.fetch_text(pixiv.api_url(id))
   case result.try(body, pixiv.originals) {
-    Ok(images) -> list.each(images, download(_, tab))
+    Ok(images) -> list.each(images, download_pixiv_image(_, tab))
     Error(Nil) -> fail(tab, "Could not fetch pixiv artwork " <> id)
+  }
+}
+
+fn download_pixiv_image(image: chrome.Image, tab: Tab) -> Nil {
+  use data_url <- chrome.fetch_data_url(image.url)
+  case data_url {
+    Ok(url) -> download(chrome.Image(url:, filename: image.filename), tab)
+    Error(Nil) -> fail(tab, "Could not fetch image: " <> image.filename)
   }
 }
 
@@ -42,7 +50,6 @@ fn download(image: chrome.Image, tab: Tab) -> Nil {
   }
 }
 
-/// Log the failure and show it to the user in the tab that asked for it.
 fn fail(tab: Tab, message: String) -> Nil {
   io.println("glean: " <> message)
   chrome.send_to_tab(tab, notice.to_json(notice.Failed(message)))

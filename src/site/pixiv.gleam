@@ -22,7 +22,9 @@
 //// ## Note
 ////
 //// i.pximg.net returns 403 without a Referer.
-//// The declarativeNetRequest rule in extension/rules.json adds one.
+//// The declarativeNetRequest rule in extension/rules.json adds one, but only
+//// to requests the extension makes itself, not to the downloads API. So the
+//// background fetches each image and saves it via a data URL (glean.gleam).
 ////
 //// ## Saved filename
 ////

@@ -53,6 +53,30 @@ export function download(image, callback) {
   );
 }
 
+export function fetch_data_url(url, callback) {
+  fetch(url, { credentials: "include" })
+    .then((res) => {
+      if (!res.ok) return Promise.reject(res.status);
+      const type = res.headers.get("content-type") ?? "";
+      if (!type.startsWith("image/")) return Promise.reject("not an image: " + type);
+      return res.blob();
+    })
+    .then(
+      (blob) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () => reject(reader.error);
+          reader.readAsDataURL(blob);
+        }),
+    )
+    .then((data_url) => callback(new Ok(data_url)))
+    .catch((err) => {
+      console.error("glean: fetch failed", url, err);
+      callback(new Error(undefined));
+    });
+}
+
 export function fetch_text(url, callback) {
   fetch(url, { credentials: "include" })
     .then((res) => (res.ok ? res.text() : Promise.reject(res.status)))

@@ -31,6 +31,15 @@ pub fn on_background_message(on_message: fn(String) -> Nil) -> Nil
 @external(javascript, "./chrome.js", "download")
 pub fn download(image: Image, callback: fn(Result(Nil, Nil)) -> Nil) -> Nil
 
+/// Fetch an image URL and pass it to `callback` as a data URL. Error(Nil) on
+/// failure or if the response is not an image. Unlike `download`, this request
+/// goes through the declarativeNetRequest rules, so it can add a Referer.
+@external(javascript, "./chrome.js", "fetch_data_url")
+pub fn fetch_data_url(
+  url: String,
+  callback: fn(Result(String, Nil)) -> Nil,
+) -> Nil
+
 /// Fetch a URL and pass the body text to `callback`. Error(Nil) on failure.
 @external(javascript, "./chrome.js", "fetch_text")
 pub fn fetch_text(url: String, callback: fn(Result(String, Nil)) -> Nil) -> Nil
