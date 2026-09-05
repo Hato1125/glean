@@ -43,6 +43,10 @@ export function set_style(element, name, value) {
   element.style.setProperty(name, value);
 }
 
+export function set_css(element, css) {
+  element.style.cssText += css;
+}
+
 export function on_click(element, handler) {
   element.addEventListener("click", (e) => {
     e.preventDefault();

@@ -39,22 +39,23 @@ fn create(message: String) -> Element {
   let bar = dom.create_element("div")
   dom.set_class(bar, class)
   dom.set_text(bar, message)
-  dom.set_style(bar, "position", "fixed")
-  dom.set_style(bar, "left", "50%")
-  dom.set_style(bar, "bottom", "24px")
-  dom.set_style(bar, "z-index", "10001")
-  dom.set_style(bar, "max-width", "80vw")
-  dom.set_style(bar, "padding", "12px 20px")
-  dom.set_style(bar, "border-radius", "12px")
-  dom.set_style(bar, "background", "#C12020")
-  dom.set_style(bar, "color", "#FFFFFF")
-  dom.set_style(bar, "font", "14px sans-serif")
-  dom.set_style(bar, "box-shadow", "0 4px 12px rgba(0, 0, 0, 0.3)")
-  dom.set_style(bar, "pointer-events", "none")
-  dom.set_style(
+  dom.set_css(
     bar,
-    "transition",
-    "transform 300ms ease-out, opacity 300ms ease-out",
+    "
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    z-index: 10001;
+    max-width: 80vw;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: #C12020;
+    color: #FFFFFF;
+    font: 14px sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    transition: transform 300ms ease-out, opacity 300ms ease-out;
+    ",
   )
   slide(bar, in: False)
   bar

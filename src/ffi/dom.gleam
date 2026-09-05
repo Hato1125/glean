@@ -37,6 +37,11 @@ pub fn set_text(element: Element, text: String) -> Nil
 @external(javascript, "./dom.js", "set_style")
 pub fn set_style(element: Element, name: String, value: String) -> Nil
 
+/// Append a block of inline CSS (`name: value;` pairs) to the element's style.
+/// Properties already set are overridden if they appear again.
+@external(javascript, "./dom.js", "set_css")
+pub fn set_css(element: Element, css: String) -> Nil
+
 /// Call `handler` on click. The event does not propagate, so the page's own
 /// click handling is not triggered.
 @external(javascript, "./dom.js", "on_click")

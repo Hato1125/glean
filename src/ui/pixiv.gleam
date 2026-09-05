@@ -26,13 +26,14 @@ fn create() -> dom.Element {
     button.create("Download", fn() {
       request.PixivArtwork(id: result.unwrap(artwork_id(dom.pathname()), ""))
     })
-  dom.set_style(b, "position", "fixed")
-  dom.set_style(b, "right", "24px")
-  dom.set_style(b, "bottom", "24px")
-  dom.set_style(b, "z-index", "10000")
-  dom.set_style(b, "padding", "10px 20px")
-  dom.set_style(b, "font-size", "14px")
-  dom.set_style(b, "box-shadow", "0 2px 8px rgba(0, 0, 0, 0.3)")
+  dom.set_css(
+    b,
+    "
+    position: fixed; right: 24px; bottom: 24px; z-index: 10000;
+    padding: 10px 20px; font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    ",
+  )
   b
 }
 
