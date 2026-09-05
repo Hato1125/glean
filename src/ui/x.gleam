@@ -4,7 +4,7 @@
 
 import ffi/dom.{type Element}
 import gleam/list
-import request
+import messages/request
 import ui/component/button
 import ui/component/snackbar
 

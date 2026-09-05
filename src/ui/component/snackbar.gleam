@@ -3,7 +3,7 @@
 
 import ffi/chrome
 import ffi/dom.{type Element}
-import notice
+import messages/notice
 
 const class = "glean-snackbar"
 

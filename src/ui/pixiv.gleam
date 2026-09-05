@@ -6,7 +6,7 @@ import ffi/dom
 import gleam/int
 import gleam/result
 import gleam/string
-import request
+import messages/request
 import ui/component/button
 import ui/component/snackbar
 

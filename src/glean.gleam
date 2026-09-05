@@ -2,8 +2,8 @@ import ffi/chrome.{type Tab}
 import gleam/io
 import gleam/list
 import gleam/result
-import notice
-import request
+import messages/notice
+import messages/request
 import site/pixiv
 import site/x
 

@@ -1,6 +1,6 @@
 import ffi/chrome
 import ffi/dom.{type Element}
-import request.{type Request}
+import messages/request.{type Request}
 
 pub const class = "glean-button"
 

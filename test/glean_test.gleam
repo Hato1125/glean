@@ -1,7 +1,7 @@
 import ffi/chrome.{Image}
 import gleeunit
-import notice
-import request
+import messages/notice
+import messages/request
 import site/pixiv
 import site/x
 import ui/pixiv as ui_pixiv
