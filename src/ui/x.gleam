@@ -5,8 +5,8 @@
 import ffi/dom.{type Element}
 import gleam/list
 import request
-import ui/button
-import ui/snackbar
+import ui/component/button
+import ui/component/snackbar
 
 const tweet = "article[data-testid=\"tweet\"]"
 

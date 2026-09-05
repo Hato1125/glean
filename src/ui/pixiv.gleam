@@ -7,8 +7,8 @@ import gleam/int
 import gleam/result
 import gleam/string
 import request
-import ui/button
-import ui/snackbar
+import ui/component/button
+import ui/component/snackbar
 
 pub fn main() -> Nil {
   snackbar.listen()
