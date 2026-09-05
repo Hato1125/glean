@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "glean",
+  "version": "0.1.0",
+  "description": "X と pixiv の画像を原寸でダウンロード",
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    { "matches": ["https://x.com/*", "https://twitter.com/*"], "js": ["content/x.js"] },
+    { "matches": ["https://www.pixiv.net/*"], "js": ["content/pixiv.js"] }
+  ],
+  "permissions": ["downloads", "declarativeNetRequestWithHostAccess"],
+  "host_permissions": ["https://www.pixiv.net/*", "https://i.pximg.net/*"],
+  "declarative_net_request": {
+    "rule_resources": [{ "id": "pixiv_referer", "enabled": true, "path": "rules.json" }]
+  }
+}
