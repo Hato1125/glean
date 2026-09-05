@@ -55,6 +55,16 @@ export function on_click(element, handler) {
   });
 }
 
+export function on_press(element, handler) {
+  element.addEventListener("pointerdown", (e) => {
+    e.stopPropagation();
+    handler(true);
+  });
+  for (const type of ["pointerup", "pointerleave", "pointercancel"]) {
+    element.addEventListener(type, () => handler(false));
+  }
+}
+
 export function append(parent, child) {
   parent.appendChild(child);
 }

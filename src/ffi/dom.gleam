@@ -47,6 +47,11 @@ pub fn set_css(element: Element, css: String) -> Nil
 @external(javascript, "./dom.js", "on_click")
 pub fn on_click(element: Element, handler: fn() -> Nil) -> Nil
 
+/// Call `handler` with True when a pointer goes down on the element, and with
+/// False when it is released, leaves the element, or is cancelled.
+@external(javascript, "./dom.js", "on_press")
+pub fn on_press(element: Element, handler: fn(Bool) -> Nil) -> Nil
+
 @external(javascript, "./dom.js", "append")
 pub fn append(parent: Element, child: Element) -> Nil
 
