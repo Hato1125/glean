@@ -8,8 +8,10 @@ import gleam/result
 import gleam/string
 import request
 import ui/button
+import ui/snackbar
 
 pub fn main() -> Nil {
+  snackbar.listen()
   use <- dom.observe
   let existing = dom.query(dom.body(), "." <> button.class)
   case artwork_id(dom.pathname()), existing {

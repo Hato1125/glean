@@ -63,6 +63,16 @@ export function pathname() {
   return location.pathname;
 }
 
+export function set_timeout(ms, callback) {
+  setTimeout(callback, ms);
+}
+
+export function next_frame(callback) {
+  // Two frames: the first lets the browser lay out the new element, so that
+  // style changes in the second start a transition from its initial state.
+  requestAnimationFrame(() => requestAnimationFrame(callback));
+}
+
 export function observe(update) {
   let scheduled = false;
   const schedule = () => {

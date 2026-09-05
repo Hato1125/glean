@@ -52,6 +52,15 @@ pub fn remove(element: Element) -> Nil
 @external(javascript, "./dom.js", "pathname")
 pub fn pathname() -> String
 
+/// Call `callback` after `ms` milliseconds.
+@external(javascript, "./dom.js", "set_timeout")
+pub fn set_timeout(ms: Int, callback: fn() -> Nil) -> Nil
+
+/// Call `callback` once the browser has painted the current DOM. Style changes
+/// made in `callback` are animated by CSS transitions instead of applied at once.
+@external(javascript, "./dom.js", "next_frame")
+pub fn next_frame(callback: fn() -> Nil) -> Nil
+
 /// Call `update` once now and again whenever the page changes.
 /// SPAs change constantly, so bursts of changes are merged into one frame.
 @external(javascript, "./dom.js", "observe")

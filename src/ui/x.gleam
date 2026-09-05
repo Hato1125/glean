@@ -6,6 +6,7 @@ import ffi/dom.{type Element}
 import gleam/list
 import request
 import ui/button
+import ui/snackbar
 
 const tweet = "article[data-testid=\"tweet\"]"
 
@@ -16,6 +17,7 @@ const photo = "img[src^=\"https://pbs.twimg.com/media/\"]"
 const quoted = "div[role=\"link\"]"
 
 pub fn main() -> Nil {
+  snackbar.listen()
   use <- dom.observe
   dom.query_all(dom.body(), tweet)
   |> list.each(attach)

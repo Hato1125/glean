@@ -1,5 +1,6 @@
 import ffi/chrome.{Image}
 import gleeunit
+import notice
 import request
 import site/pixiv
 import site/x
@@ -82,6 +83,14 @@ pub fn request_roundtrip_test() {
   let pixiv = request.PixivArtwork(id: "123456")
   assert request.parse(request.to_json(x)) == Ok(x)
   assert request.parse(request.to_json(pixiv)) == Ok(pixiv)
+}
+
+// --- notice ---
+
+pub fn notice_roundtrip_test() {
+  let failed = notice.Failed(message: "Download failed: a.png")
+  assert notice.parse(notice.to_json(failed)) == Ok(failed)
+  assert notice.parse("{\"type\":\"other\"}") == Error(Nil)
 }
 
 // --- ui/pixiv ---
