@@ -31,6 +31,15 @@ pub fn on_background_message(on_message: fn(String) -> Nil) -> Nil
 @external(javascript, "./chrome.js", "download")
 pub fn download(image: Image, callback: fn(Result(Nil, Nil)) -> Nil) -> Nil
 
+/// Read a string saved with `storage_set`. Error(Nil) if it was never saved.
+/// Works in the background and in the popup.
+@external(javascript, "./chrome.js", "storage_get")
+pub fn storage_get(key: String, callback: fn(Result(String, Nil)) -> Nil) -> Nil
+
+/// Save a string under `key`. Synced across the user's browsers.
+@external(javascript, "./chrome.js", "storage_set")
+pub fn storage_set(key: String, value: String) -> Nil
+
 /// Fetch an image URL and pass it to `callback` as a data URL. Error(Nil) on
 /// failure or if the response is not an image. Unlike `download`, this request
 /// goes through the declarativeNetRequest rules, so it can add a Referer.

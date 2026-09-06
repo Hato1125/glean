@@ -4,11 +4,12 @@
   "version": "0.1.0",
   "description": "X と pixiv の画像を原寸でダウンロード",
   "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html" },
   "content_scripts": [
     { "matches": ["https://x.com/*", "https://twitter.com/*"], "js": ["content/x.js"] },
     { "matches": ["https://www.pixiv.net/*"], "js": ["content/pixiv.js"] }
   ],
-  "permissions": ["downloads", "declarativeNetRequestWithHostAccess"],
+  "permissions": ["downloads", "storage", "declarativeNetRequestWithHostAccess"],
   "host_permissions": ["https://www.pixiv.net/*", "https://i.pximg.net/*"],
   "declarative_net_request": {
     "rule_resources": [{ "id": "pixiv_referer", "enabled": true, "path": "rules.json" }]

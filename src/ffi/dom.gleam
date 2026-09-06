@@ -52,6 +52,21 @@ pub fn on_click(element: Element, handler: fn() -> Nil) -> Nil
 @external(javascript, "./dom.js", "on_press")
 pub fn on_press(element: Element, handler: fn(Bool) -> Nil) -> Nil
 
+@external(javascript, "./dom.js", "set_attribute")
+pub fn set_attribute(element: Element, name: String, value: String) -> Nil
+
+/// The current text of an input element.
+@external(javascript, "./dom.js", "value")
+pub fn value(element: Element) -> String
+
+@external(javascript, "./dom.js", "set_value")
+pub fn set_value(element: Element, value: String) -> Nil
+
+/// Call `handler` with the new text when the user finishes editing an input
+/// (Enter or focus leaving it).
+@external(javascript, "./dom.js", "on_change")
+pub fn on_change(element: Element, handler: fn(String) -> Nil) -> Nil
+
 @external(javascript, "./dom.js", "append")
 pub fn append(parent: Element, child: Element) -> Nil
 

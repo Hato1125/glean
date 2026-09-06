@@ -2,6 +2,7 @@ import ffi/chrome.{Image}
 import gleeunit
 import messages/notice
 import messages/request
+import settings
 import site/pixiv
 import site/x
 import ui/pixiv as ui_pixiv
@@ -102,4 +103,20 @@ pub fn pixiv_artwork_id_test() {
   assert ui_pixiv.artwork_id("/artworks/abc") == Error(Nil)
   assert ui_pixiv.artwork_id("/users/123456") == Error(Nil)
   assert ui_pixiv.artwork_id("/") == Error(Nil)
+}
+
+// --- settings ---
+
+pub fn settings_normalize_folder_test() {
+  assert settings.normalize_folder(" glean/pixiv/ ") == "glean/pixiv"
+  assert settings.normalize_folder("/") == ""
+  assert settings.normalize_folder("a\\b") == "a/b"
+  assert settings.normalize_folder("") == ""
+}
+
+pub fn settings_path_test() {
+  let s = settings.Settings(x_folder: "glean/x", pixiv_folder: "")
+  assert settings.path(s, settings.X, "a.png") == "glean/x/a.png"
+  assert settings.path(s, settings.Pixiv, "a.png") == "a.png"
+  assert settings.set_folder(s, settings.Pixiv, "p").pixiv_folder == "p"
 }

@@ -65,6 +65,22 @@ export function on_press(element, handler) {
   }
 }
 
+export function set_attribute(element, name, value) {
+  element.setAttribute(name, value);
+}
+
+export function value(element) {
+  return element.value;
+}
+
+export function set_value(element, value) {
+  element.value = value;
+}
+
+export function on_change(element, handler) {
+  element.addEventListener("change", () => handler(element.value));
+}
+
 export function append(parent, child) {
   parent.appendChild(child);
 }

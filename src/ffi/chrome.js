@@ -53,6 +53,17 @@ export function download(image, callback) {
   );
 }
 
+export function storage_get(key, callback) {
+  chrome.storage.sync.get(key, (items) => {
+    const value = items[key];
+    callback(typeof value === "string" ? new Ok(value) : new Error(undefined));
+  });
+}
+
+export function storage_set(key, value) {
+  chrome.storage.sync.set({ [key]: value });
+}
+
 export function fetch_data_url(url, callback) {
   fetch(url, { credentials: "include" })
     .then((res) => {

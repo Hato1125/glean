@@ -3,6 +3,7 @@ import gleam/list
 import gleam/result
 import messages/notice
 import messages/request
+import settings
 import site/pixiv
 import site/x
 
@@ -20,7 +21,7 @@ fn on_message(text: String, tab: Tab) -> Nil {
 
 fn x_image(src: String, tab: Tab) -> Nil {
   case x.original(src) {
-    Ok(image) -> save(image, tab)
+    Ok(image) -> save(image, settings.X, tab)
     Error(Nil) -> fail(tab, "Could not resolve image: " <> src)
   }
 }
@@ -36,13 +37,16 @@ fn pixiv_artwork(id: String, tab: Tab) -> Nil {
 fn pixiv_image(image: chrome.Image, tab: Tab) -> Nil {
   use data_url <- chrome.fetch_data_url(image.url)
   case data_url {
-    Ok(url) -> save(chrome.Image(url:, filename: image.filename), tab)
+    Ok(url) ->
+      save(chrome.Image(url:, filename: image.filename), settings.Pixiv, tab)
     Error(Nil) -> fail(tab, "Could not fetch image: " <> image.filename)
   }
 }
 
-fn save(image: chrome.Image, tab: Tab) -> Nil {
-  use result <- chrome.download(image)
+fn save(image: chrome.Image, site: settings.Site, tab: Tab) -> Nil {
+  use settings <- settings.load
+  let filename = settings.path(settings, site, image.filename)
+  use result <- chrome.download(chrome.Image(url: image.url, filename:))
   case result {
     Ok(Nil) -> Nil
     Error(Nil) -> fail(tab, "Download failed: " <> image.filename)
